@@ -616,6 +616,7 @@ background:var(--p1);border:1px solid var(--orange);border-radius:999px;padding:
 .sndbtn:hover,.sndbtn:focus-visible{background:#fff;color:var(--orange);}
 .sndbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .sndbtn.bye{opacity:0;pointer-events:none;}
+#method:not(.mnoanim) .mzoom{transition:transform .55s cubic-bezier(.4,0,.2,1),width .55s cubic-bezier(.4,0,.2,1);}.mspot{box-shadow:0 0 0 3px var(--orange),0 0 0 4000px rgba(255,255,255,.72);}.mspot.soft{box-shadow:0 0 0 4000px rgba(255,255,255,.55);}
 
 .menubtn{display:none;align-items:center;gap:7px;font:700 13px var(--sans);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;}
 .menubtn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;}
@@ -1281,8 +1282,8 @@ background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 10px 24px rgba(
         var b = data[cur].box, pw = b[2] / 100 * W, ph = b[3] / 100 * (W / ar);
         var H = Math.min(maxH, W * ph / pw), s = Math.min(W / pw, H / ph);
         var x = -b[0] / 100 * W * s + (W - pw * s) / 2, y = -b[1] / 100 * (W / ar) * s + (H - ph * s) / 2;
-        view.style.height = H + 'px'; zoom.style.width = W + 'px';
-        zoom.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+        view.style.height = H + 'px'; zoom.style.width = (W * s) + 'px';
+        zoom.style.transform = 'translate(' + x + 'px,' + y + 'px)';
       }
       function place(box, soft) {
         if (!box) { spot.hidden = true; return; }
