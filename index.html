@@ -1362,18 +1362,12 @@ var t=1000*parseFloat(m[1]);function f(){document.getAnimations().forEach(functi
 document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m.open=false;});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')m.open=false;});})();</script>
 <script>(function(){var v=document.getElementById('hero');if(!v||/[?&]still/.test(location.search))return;
-var btn=null,done=false,evs=['click','touchend','keydown'];
-function stop(){done=true;evs.forEach(function(e){document.removeEventListener(e,on,true);});if(btn){btn.remove();btn=null;}}
-function on(ev){if(done||(ev.target.closest&&ev.target.closest('.ribbon')))return;if(ev.target===v){stop();return;}
-var r=v.getBoundingClientRect(),seen=r.bottom>0&&r.top<innerHeight;stop();v.muted=false;if(seen){v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play();});}}
-function wait(){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){});
-btn=document.createElement('button');btn.type='button';btn.className='sndbtn';btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>Tap for sound';v.parentNode.appendChild(btn);
-// it leaves 15 s after it first comes on screen (on phones the teaser starts below the fold), and the first-tap rule leaves with it
-var seen=function(){setTimeout(function(){if(!btn)return;btn.classList.add('bye');setTimeout(function(){if(!done)stop();},500);},15000);};
-if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();seen();}},{threshold:.5});io.observe(btn);}else seen();
-evs.forEach(function(e){document.addEventListener(e,on,true);});
-v.addEventListener('volumechange',function(){if(!v.muted)stop();});}
-v.muted=false;var p=v.play();if(p&&p.then)p.then(function(){done=true;}).catch(wait);})();</script>
+v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){});
+var btn=document.createElement('button');btn.type='button';btn.className='sndbtn';btn.setAttribute('aria-label','Click to unmute');
+btn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9l6 6M22 9l-6 6"/></svg>Click to unmute';v.parentNode.appendChild(btn);
+function gone(){if(btn){btn.remove();btn=null;}}
+btn.addEventListener('click',function(e){e.stopPropagation();gone();v.muted=false;v.currentTime=0;var q=v.play();if(q&&q.catch)q.catch(function(){});});
+v.addEventListener('volumechange',function(){if(!v.muted)gone();});})();</script>
 <script>(function(){var r=document.querySelector('.ribbon'),b=r&&r.querySelector('.menubtn');if(!b)return;
 function set(o){r.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');}
 b.addEventListener('click',function(){set(!r.classList.contains('open'));});
