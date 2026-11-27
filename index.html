@@ -674,7 +674,7 @@ background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 10px 24px rgba(
 #pairs .carnav,#all .carnav{position:absolute;top:14px;right:14px;margin:0;height:34px;z-index:2;}
 #pairs .rec .rhead,#all .rec .rhead{justify-content:flex-start;align-items:center;min-height:34px;margin:0 0 8px;padding-right:300px;}
 @media (max-width:640px){#pairs .rec .rhead,#all .rec .rhead{padding-right:0;}   /* phones as TACO-Bench (Sam, 2026-11-27: "in the mobile, the next button is at the center"): k, n left, arrows right, one row */
-#pairs .carnav,#all .carnav{right:12px;}
+#pairs .carnav{top:10px;right:8px;}#all .carnav{right:14px;}   /* each at its panel's phone padding (pairs 10 / 8 px, all 14 px): on the k, n line, edges even (Sam, 2026-11-27) */
 .carnav{gap:7px;}.carnav .dots{gap:4px;}.carnav .dot{width:7px;height:7px;}   /* every carousel nav one size on phones, TACO-Bench included (Sam, 2026-11-27) */
 .carnav .car{width:28px;height:28px;font-size:19px;}}
 </style>
